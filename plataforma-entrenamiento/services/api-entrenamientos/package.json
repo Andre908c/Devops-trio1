@@ -1,7 +1,7 @@
 {
   "name": "api-entrenamientos",
   "version": "1.0.0",
-  "description": "FitCoach Pro - Microservicio de videos y feedback del coach. Responsable: Daniel",
+  "description": "Microservicio de entrenamientos, videos y feedbacks",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
@@ -9,14 +9,12 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "joi": "^17.13.3",
-    "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.11.5",
-    "sequelize": "^6.37.8"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7",
+    "sequelize": "^6.37.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.0"
   }
 }
