@@ -1,19 +1,31 @@
-'use strict';
+const videoServicio = require('../servicios/videoServicio');
 
-// TODO Daniel: crear, listar, cambiar estado, feedback
-const videoControlador = {
-  crear: async (_req, res) => {
-    res.status(501).json({ mensaje: 'Pendiente de implementar' });
-  },
-  listar: async (_req, res) => {
-    res.status(501).json({ mensaje: 'Pendiente de implementar' });
-  },
-  cambiarEstado: async (_req, res) => {
-    res.status(501).json({ mensaje: 'Pendiente de implementar' });
-  },
-  dejarFeedback: async (_req, res) => {
-    res.status(501).json({ mensaje: 'Pendiente de implementar' });
+exports.crear = async (req, res) => {
+  try {
+    const video = await videoServicio.registrarVideo(req.body);
+    res.status(201).json({ ok: true, video });
+  } catch (error) {
+    res.status(400).json({ ok: false, error: error.message });
   }
 };
 
-module.exports = videoControlador;
+exports.listar = async (req, res) => {
+  try {
+    const { atleta_id, estado } = req.query;
+    const videos = await videoServicio.listarVideos({ atleta_id, estado });
+    res.json({ ok: true, videos });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: error.message });
+  }
+};
+
+exports.actualizarEstado = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { estado, coach_id } = req.body;
+    const video = await videoServicio.cambiarEstadoVideo(id, estado, coach_id);
+    res.json({ ok: true, video });
+  } catch (error) {
+    res.status(400).json({ ok: false, error: error.message });
+  }
+};

@@ -1,13 +1,9 @@
-'use strict';
-const { Router } = require('express');
-const router = Router();
+const express = require('express');
+const router = express.Router();
+const videoControlador = require('../controladores/videoControlador');
 
-// TODO Daniel:
-// POST   /api/videos
-// GET    /api/videos
-// GET    /api/videos/mios
-// GET    /api/videos/:id
-// PATCH  /api/videos/:id/estado
-// POST   /api/videos/:id/feedback
+router.post('/', videoControlador.crear);
+router.get('/', videoControlador.listar);
+router.patch('/:id/estado', videoControlador.actualizarEstado);
 
 module.exports = router;
