@@ -1,5 +1,5 @@
 /**
- * FitCoach Pro – Control de sesión y gestión de roles (frontend RBAC)
+ * FitCoach Pro – Control de sesión, gestión de roles (frontend RBAC) e Interceptor JWT 401
  */
 
 (function () {
@@ -23,6 +23,22 @@
   function cerrarSesion() {
     localStorage.removeItem('fitcoach_sesion');
     window.location.href = 'login.html';
+  }
+
+  // Interceptor de peticiones HTTP para manejar tokens JWT expirados (401 Unauthorized)
+  const fetchOriginal = window.fetch;
+  if (fetchOriginal) {
+    window.fetch = async function (...args) {
+      const respuesta = await fetchOriginal.apply(this, args);
+      if (respuesta && respuesta.status === 401) {
+        console.warn('Sesión expirada o token inválido (401 Unauthorized). Redirigiendo a login...');
+        localStorage.removeItem('fitcoach_sesion');
+        if (paginaActual !== 'login.html') {
+          window.location.href = 'login.html';
+        }
+      }
+      return respuesta;
+    };
   }
 
   // Redirigir al login si no hay sesión iniciada (Flujo de pantalla inicial)
