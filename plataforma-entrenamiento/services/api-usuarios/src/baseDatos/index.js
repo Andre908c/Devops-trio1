@@ -1,5 +1,5 @@
 'use strict';
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Op } = require('sequelize');
 
 const sequelize = new Sequelize(
   process.env.DB_NAME || 'fitcoach_pro',
@@ -14,6 +14,7 @@ const sequelize = new Sequelize(
 );
 
 const Usuario = require('../modelos/usuario')(sequelize, DataTypes);
+const Log = require('../modelos/log')(sequelize, DataTypes);
 
 async function conectarBaseDatos() {
   await sequelize.authenticate();
@@ -22,6 +23,8 @@ async function conectarBaseDatos() {
 
 module.exports = {
   sequelize,
+  Op,
   Usuario,
+  Log,
   conectarBaseDatos
 };

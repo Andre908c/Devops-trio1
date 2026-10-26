@@ -5,7 +5,14 @@ const videoServicio = require('../servicios/videoServicio');
 const esquemaCrear = Joi.object({
   titulo: Joi.string().min(2).max(200).required(),
   descripcion: Joi.string().allow('', null),
-  url_archivo: Joi.string().uri().max(500).required()
+  url_archivo: Joi.string()
+    .uri()
+    .regex(/\.(mp4|mov|avi|webm)($|\?)/i)
+    .max(500)
+    .required()
+    .messages({
+      'string.pattern.base': 'Formato de video no permitido. Solo se permiten extensiones .mp4, .mov, .avi o .webm'
+    })
 });
 
 module.exports = {

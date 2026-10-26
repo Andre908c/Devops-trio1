@@ -1,5 +1,5 @@
 /**
- * FitCoach Pro – Control de sesión y gestión de roles (frontend)
+ * FitCoach Pro – Control de sesión y gestión de roles (frontend RBAC)
  */
 
 (function () {
@@ -39,19 +39,33 @@
     const sesion = obtenerSesion();
     const nav = document.querySelector('.navbar');
 
-    if (nav) {
-      const botonDerecha = nav.querySelector('.btn-primary.btn-sm, .btn.btn-primary.btn-sm');
+    if (sesion) {
+      const rolActual = sesion.rol || 'atleta';
+      const esAdmin = rolActual === 'admin' || rolActual === 'super_admin';
+      const esSuperAdmin = rolActual === 'super_admin';
+      const esCoach = rolActual === 'coach' || esAdmin;
 
-      if (sesion) {
-        // Formatear rol para mostrar
+      // Ocultamiento Dinámico de Elementos según RBAC
+      document.querySelectorAll('.admin-only').forEach(el => {
+        el.style.display = esAdmin ? '' : 'none';
+      });
+      document.querySelectorAll('.super-admin-only').forEach(el => {
+        el.style.display = esSuperAdmin ? '' : 'none';
+      });
+      document.querySelectorAll('.coach-only').forEach(el => {
+        el.style.display = esCoach ? '' : 'none';
+      });
+
+      // --- Navbar ---
+      if (nav) {
+        const botonDerecha = nav.querySelector('.btn-primary.btn-sm, .btn.btn-primary.btn-sm');
+
         const rolTexto = {
           'atleta': 'Atleta',
           'coach': 'Coach',
           'admin': 'Admin',
           'super_admin': 'SuperAdmin'
-        }[sesion.rol || 'atleta'] || 'Atleta';
-
-        const esAdmin = sesion.rol === 'admin' || sesion.rol === 'super_admin';
+        }[rolActual] || 'Atleta';
 
         if (botonDerecha) {
           botonDerecha.textContent = 'Cerrar sesión';
@@ -70,7 +84,7 @@
 
           let adminBadgeHtml = '';
           if (esAdmin) {
-            const labelAdmin = sesion.rol === 'super_admin' ? '⚡ Panel SuperAdmin' : '🛡️ Panel Admin';
+            const labelAdmin = esSuperAdmin ? '⚡ Panel SuperAdmin' : '🛡️ Panel Admin';
             adminBadgeHtml = `<span id="adminPanelBtn" style="background:#8b5cf6;color:#fff;padding:0.25rem 0.6rem;border-radius:12px;font-weight:bold;cursor:pointer;font-size:0.75rem;box-shadow:0 2px 6px rgba(139,92,246,0.4);">${labelAdmin}</span>`;
           }
 
@@ -91,12 +105,20 @@
             }
           }
         }
-      } else {
+      }
+    } else {
+      if (nav) {
+        const botonDerecha = nav.querySelector('.btn-primary.btn-sm, .btn.btn-primary.btn-sm');
         if (botonDerecha) {
           botonDerecha.href = 'login.html';
           botonDerecha.textContent = 'Iniciar sesión';
         }
       }
+
+      // Ocultar elementos de administración si no hay sesión
+      document.querySelectorAll('.admin-only, .super-admin-only, .coach-only').forEach(el => {
+        el.style.display = 'none';
+      });
     }
 
     // Hero en index.html
