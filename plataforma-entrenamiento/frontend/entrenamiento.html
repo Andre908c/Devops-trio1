@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="jVLoSUlE7rnCnK-15dofCUb888qWvu4DLF52y-tBfhs" />
+  <title>Mi Entrenamiento – FitCoach Pro</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-096CNY7RHV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-096CNY7RHV');
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yxu6wvsm9n");
+  </script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">FitCoach <span>Pro</span></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Inicio</a>
+      <a href="entrenamiento.html" class="nav-link active">Mi Entrenamiento</a>
+      <a href="nutricion.html" class="nav-link">Nutrición</a>
+      <a href="recompensas.html" class="nav-link">Recompensas</a>
+      <a href="precios.html" class="nav-link">Precios</a>
+    </div>
+    <a href="login.html" class="btn btn-primary btn-sm">Iniciar sesión</a>
+  </nav>
+
+  <section class="page-header">
+    <h1>Mi Entrenamiento</h1>
+    <p>Sube tus videos, revisa el feedback de tu coach y sigue tu progreso.</p>
+  </section>
+
+  <section class="section">
+    <div class="dashboard-grid">
+      <!-- Resumen -->
+      <div class="card highlight-card">
+        <h3>Resumen de la semana</h3>
+        <div class="stats-row">
+          <div class="stat">
+            <span class="stat-value">4/5</span>
+            <span class="stat-label">Sesiones</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">2</span>
+            <span class="stat-label">Videos revisados</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">86%</span>
+            <span class="stat-label">Adherencia</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subir video -->
+      <div class="card">
+        <h3>Subir nuevo video</h3>
+        <p class="text-muted">Graba tu serie y súbela para que tu coach la revise.</p>
+        <div class="upload-zone" id="uploadZone">
+          <div class="upload-icon">📤</div>
+          <p>Arrastra tu video aquí o haz clic para seleccionar</p>
+          <small>MP4, MOV • Máx. 200 MB</small>
+        </div>
+        <button class="btn btn-primary" style="width:100%; margin-top:1rem;">Subir video</button>
+      </div>
+    </div>
+
+    <!-- Historial de videos -->
+    <div class="card" style="margin-top:2rem;">
+      <h3>Historial de videos</h3>
+      <div class="video-list">
+        <div class="video-item">
+          <div class="video-thumb">🏋️</div>
+          <div class="video-info">
+            <strong>Press banca – 4x8</strong>
+            <small>Subido hace 2 días</small>
+          </div>
+          <div class="video-status status-reviewed">Revisado</div>
+          <button class="btn btn-secondary btn-sm">Ver feedback</button>
+        </div>
+        <div class="video-item">
+          <div class="video-thumb">💪</div>
+          <div class="video-info">
+            <strong>Dominadas – 3xMáx</strong>
+            <small>Subido hace 4 días</small>
+          </div>
+          <div class="video-status status-reviewed">Revisado</div>
+          <button class="btn btn-secondary btn-sm">Ver feedback</button>
+        </div>
+        <div class="video-item">
+          <div class="video-thumb">🦵</div>
+          <div class="video-info">
+            <strong>Sentadilla – 5x5</strong>
+            <small>Subido hace 1 semana</small>
+          </div>
+          <div class="video-status status-pending">Pendiente</div>
+          <button class="btn btn-secondary btn-sm" disabled>Esperando coach</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback destacado -->
+    <div class="card feedback-card" style="margin-top:2rem;">
+      <h3>Último feedback del coach</h3>
+      <div class="coach-message">
+        <div class="coach-avatar">C</div>
+        <div>
+          <strong>Coach Andrés</strong>
+          <p>«En el press banca estás abriendo demasiado los codos en la bajada. Intenta mantenerlos a 45°. También podrías subir 2.5 kg la próxima sesión.»</p>
+          <small>Hace 2 horas</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      © 2026 FitCoach Pro – Proyecto académico para análisis UX con Microsoft Clarity
+    </div>
+  </footer>
+
+  <script src="auth.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

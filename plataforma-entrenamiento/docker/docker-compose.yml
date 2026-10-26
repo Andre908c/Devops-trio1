@@ -1,0 +1,69 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: fitcoach_pro
+      MYSQL_USER: fitcoach
+      MYSQL_PASSWORD: fitcoachpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ../database/crear_base_datos.sql:/docker-entrypoint-initdb.d/01-schema.sql
+
+  api-usuarios:
+    build: ../services/api-usuarios
+    ports: ["3001:3001"]
+    environment:
+      PORT: 3001
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: fitcoach_pro
+      DB_USER: fitcoach
+      DB_PASSWORD: fitcoachpass
+      JWT_SECRET: secreto_compartido_cambiar
+    depends_on: [mysql]
+
+  api-entrenamientos:
+    build: ../services/api-entrenamientos
+    ports: ["3002:3002"]
+    environment:
+      PORT: 3002
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: fitcoach_pro
+      DB_USER: fitcoach
+      DB_PASSWORD: fitcoachpass
+      JWT_SECRET: secreto_compartido_cambiar
+    depends_on: [mysql]
+
+  api-nutricion:
+    build: ../services/api-nutricion
+    ports: ["3003:3003"]
+    environment:
+      PORT: 3003
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: fitcoach_pro
+      DB_USER: fitcoach
+      DB_PASSWORD: fitcoachpass
+      JWT_SECRET: secreto_compartido_cambiar
+    depends_on: [mysql]
+
+  api-recompensas:
+    build: ../services/api-recompensas
+    ports: ["3004:3004"]
+    environment:
+      PORT: 3004
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: fitcoach_pro
+      DB_USER: fitcoach
+      DB_PASSWORD: fitcoachpass
+      JWT_SECRET: secreto_compartido_cambiar
+    depends_on: [mysql]
+
+volumes:
+  mysql_data:

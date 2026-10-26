@@ -1,0 +1,11 @@
+'use strict';
+const { Router } = require('express');
+const ctrl = require('../controladores/recompensaControlador');
+const { autenticar, autorizar } = require('../middleware/authMiddleware');
+const router = Router();
+router.get('/mias', autenticar, autorizar('atleta'), ctrl.mias);
+router.post('/desbloquear', autenticar, autorizar('atleta', 'admin', 'super_admin'), ctrl.desbloquear);
+router.get('/promociones/activas', ctrl.promocionesActivas);
+router.get('/promociones', autenticar, autorizar('admin', 'super_admin'), ctrl.listarPromociones);
+router.post('/promociones', autenticar, autorizar('admin', 'super_admin'), ctrl.crearPromocion);
+module.exports = router;
